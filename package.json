@@ -18,6 +18,7 @@
   "homepage": "https://github.com/charmingruby/cap#readme",
   "description": "",
   "devDependencies": {
+    "@biomejs/biome": "1.9.4",
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "hardhat": "^2.22.19"
   }
