@@ -1,5 +1,8 @@
 import type { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const config: HardhatUserConfig = {
   solidity: "0.8.28",
@@ -12,7 +15,14 @@ const config: HardhatUserConfig = {
         mnemonic: "test test test test test test test test test test test junk",
       },
     },
-  },
-};
+    sepolia: {
+      url: process.env.INFURA_URL,
+      chainId: 11155111,
+      accounts: {
+        mnemonic: process.env.SECRET,
+      },
+    },
+  }
+}
 
 export default config;
