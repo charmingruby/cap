@@ -10,7 +10,7 @@ contract FeatureDatabase {
         uint32 expiresAt;
     }
 
-    mapping(uint32 => Feature) features;
+    mapping(uint32 => Feature) public features;
 
     uint256 private amount = 0;
     uint32 private nextId = 0;
