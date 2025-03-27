@@ -7,17 +7,21 @@ contract FeatureDatabase {
         string description;
         string status;
         uint8 priority;
-        uint16 expires_at;
+        uint32 expiresAt;
     }
 
     mapping(uint32 => Feature) features;
 
-    uint256 public amount = 0;
+    uint256 private amount = 0;
     uint32 private nextId = 0;
     address private immutable owner;
 
     constructor() {
         owner = msg.sender;
+    }
+
+    function getAmount() public view returns (uint256) {
+        return amount;
     }
 
     function store(Feature memory feat) public {
@@ -49,8 +53,8 @@ contract FeatureDatabase {
         if (featureFound.priority != feat.priority)
             features[id].priority = feat.priority;
 
-        if (featureFound.expires_at != feat.expires_at)
-            features[id].expires_at = feat.expires_at;
+        if (featureFound.expiresAt != feat.expiresAt)
+            features[id].expiresAt = feat.expiresAt;
     }
 
     function remove(uint32 id) public restricted {

@@ -25,8 +25,24 @@ describe("FeatureDatabase", () => {
     it("should receive a empty amount of features", async () => {
         const { featDb, owner, otherAccount } = await loadFixture(deployFixture);
 
-        const amountOfFeats = await featDb.amount()
+        const amountOfFeats = await featDb.getAmount()
 
         expect(amountOfFeats).to.equal(0);
+    });
+
+    it("should start with empty", async () => {
+        const { featDb, owner, otherAccount } = await loadFixture(deployFixture);
+
+        const expiresAt = Math.floor(Date.now() / 1000) + 10 * 60; // 10 minutes from now
+
+        await featDb.store({
+            title: "New Feature",
+            description: "This is a new feature",
+            status: "PENDING",
+            expiresAt,
+            priority: 1,
+        })
+
+        expect(await featDb.getAmount()).to.equal(1);
     });
 });
