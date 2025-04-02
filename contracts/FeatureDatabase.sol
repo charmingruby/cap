@@ -12,22 +12,22 @@ contract FeatureDatabase {
 
     mapping(uint32 => Feature) public features;
 
-    uint256 private amount = 0;
-    uint32 private nextId = 0;
-    address private immutable owner;
+    uint256 private _amount = 0;
+    uint32 private _nextId = 0;
+    address private immutable _owner;
 
     constructor() {
-        owner = msg.sender;
+        _owner = msg.sender;
     }
 
     function getAmount() public view returns (uint256) {
-        return amount;
+        return _amount;
     }
 
     function store(Feature memory feat) public {
-        nextId++;
-        features[nextId] = feat;
-        amount++;
+        _nextId++;
+        features[_nextId] = feat;
+        _amount++;
     }
 
     function save(uint32 id, Feature memory feat) public {
@@ -61,11 +61,11 @@ contract FeatureDatabase {
         require(!compareStr(features[id].title, ""), "Feature does not exist");
 
         delete features[id];
-        amount--;
+        _amount--;
     }
 
     modifier restricted() {
-        require(owner == msg.sender, "Only the owner can remove features");
+        require(_owner == msg.sender, "Only the owner can remove features");
         _;
     }
 

@@ -5,6 +5,7 @@
   "scripts": {
     "start": "npx hardhat node",
     "test": "npx hardhat test",
+    "compile": "npx hardhat compile",
     "deploy:dev": "npx hardhat ignition deploy ignition/modules/FeatureDatabase.ts --network local",
     "deploy:prod": "npx hardhat ignition deploy ignition/modules/FeatureDatabase.ts --network sepolia"
   },
